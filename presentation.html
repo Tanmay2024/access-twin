@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessTwin - Project Presentation & Pitch Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-page: #f8fafc;
+            --card-border: #e2e8f0;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+            background: #f1f5f9;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Top Action Bar (hidden in print) */
+        .no-print-bar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-print {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn-print:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 20px 40px;
+        }
+
+        /* Slide / Page Container */
+        .slide {
+            background: #ffffff;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 48px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            break-after: page;
+        }
+
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 16px;
+        }
+
+        .slide-title-group h2 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+        }
+
+        .slide-title-group p {
+            margin: 4px 0 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .slide-tag {
+            background: #eff6ff;
+            color: var(--primary);
+            border: 1px solid #dbeafe;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Slide 1: Cover */
+        .cover-slide {
+            padding: 60px 48px;
+            background: radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                        #ffffff;
+            text-align: center;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin: 0 0 16px;
+            color: #0f172a;
+        }
+
+        .cover-subtitle {
+            font-size: 18px;
+            color: #475569;
+            max-width: 680px;
+            margin: 0 auto 32px;
+            font-weight: 500;
+        }
+
+        .cover-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 24px;
+            margin-top: 40px;
+        }
+
+        /* Grid Cards */
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .info-card.highlight {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        .info-card h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-card p {
+            margin: 0;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* Feature List */
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .feature-icon {
+            font-size: 18px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Demo Step Box */
+        .demo-box {
+            border: 1.5px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background: #ffffff;
+        }
+
+        .demo-box.active {
+            border-color: var(--primary);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.1);
+        }
+
+        .demo-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .demo-tag.baseline { background: #dcfce7; color: #166534; }
+        .demo-tag.reroute { background: #fef3c7; color: #92400e; }
+        .demo-tag.outage { background: #fee2e2; color: #991b1b; }
+
+        .footer-note {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 24px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 12px;
+        }
+
+        /* Print Media Styles */
+        @media print {
+            body {
+                background: #ffffff;
+            }
+            .no-print-bar {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .slide {
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                margin-bottom: 0;
+                padding: 36px 40px;
+                min-height: 100vh;
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Print / Export Bar -->
+    <div class="no-print-bar">
+        <div>
+            <strong style="color: #0f172a; font-size: 15px;">AccessTwin Presentation Deck</strong>
+            <span style="color: #64748b; font-size: 13px; margin-left: 10px;">Ready to Present & Export</span>
+        </div>
+        <button class="btn-print" onclick="window.print()">
+            🖨️ Print / Save as PDF
+        </button>
+    </div>
+
+    <div class="container">
+
+        <!-- SLIDE 1: COVER -->
+        <section class="slide cover-slide">
+            <div class="cover-badge">
+                <span>♿ Indoor Digital Twin Platform</span>
+            </div>
+            <h1 class="cover-title">AccessTwin</h1>
+            <p class="cover-subtitle">
+                Dynamic Indoor Accessibility Intelligence & Real-Time Rerouting for Complex Facilities
+            </p>
+            <div class="card-grid-3" style="margin-top: 40px; text-align: left;">
+                <div class="info-card">
+                    <strong style="color: #2563eb; font-size: 14px;">Dynamic Sensing</strong>
+                    <p style="margin-top: 4px;">Real-time infrastructure state tracking (Elevators & Ramps)</p>
+                </div>
+                <div class="info-card">
+                    <strong style="color: #10b981; font-size: 14px;">Persona Pathfinding</strong>
+                    <p style="margin-top: 4px;">Accessibility-weighted Dijkstra routing with zero stairs</p>
+                </div>
+                <div class="info-card">
+                    <strong style="color: #f59e0b; font-size: 14px;">Automatic Rerouting</strong>
+                    <p style="margin-top: 4px;">Instant alternative multi-floor bypass when barriers arise</p>
+                </div>
+            </div>
+            <div class="cover-meta">
+                <span><strong>Live URL:</strong> access-twin-zeta.vercel.app</span>
+                <span><strong>Author:</strong> Tanmay</span>
+                <span><strong>Platform:</strong> Web / Cloud Edge</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: THE PROBLEM -->
+        <section class="slide">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <h2>1. The Problem: The Indoor Accessibility Blindspot</h2>
+                    <p>Why conventional maps fail mobility-impaired individuals</p>
+                </div>
+                <span class="slide-tag">Problem Statement</span>
+            </div>
+
+            <div class="card-grid-2">
+                <div class="info-card">
+                    <h3>❌ Static Floor Plans</h3>
+                    <p>Conventional navigation apps stop at the building threshold. Indoor maps are typically static PDFs or static directories that assume all infrastructure is permanently operational.</p>
+                </div>
+                <div class="info-card">
+                    <h3>⚠️ The "Broken Elevator" Trap</h3>
+                    <p>A wheelchair user travels across a large campus to an elevator, only to find an out-of-order sign. They are stranded with no knowledge of alternative accessible ramps or lifts.</p>
+                </div>
+                <div class="info-card">
+                    <h3>👥 One Size Does Not Fit All</h3>
+                    <p>Mobility needs vary drastically: electric wheelchair users require strict step-free paths, while elderly visitors or injured students need minimized walking distances.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🔕 Lack of Incident Feedback</h3>
+                    <p>When unexpected blockages occur (luggage blocking a ramp, temporary maintenance), facility management lacks a real-time crowdsourcing feedback loop to warn visitors.</p>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <span>AccessTwin Presentation Deck</span>
+                <span>Slide 2 / 6</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: THE SOLUTION -->
+        <section class="slide">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <h2>2. The Solution: Dynamic Digital Twin</h2>
+                    <p>Bridging live physical infrastructure with personalized navigation</p>
+                </div>
+                <span class="slide-tag">Core Value</span>
+            </div>
+
+            <div class="card-grid-2">
+                <div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🧭</div>
+                        <div>
+                            <strong>5 Mobility Profiles</strong>
+                            <p style="font-size: 13px; color: #64748b;">Wheelchair, Elderly (Step-Free), Temporary Limitation, Caregiver/Family, and Standard Visitor.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div>
+                            <strong>Real-Time Dynamic Rerouting</strong>
+                            <p style="font-size: 13px; color: #64748b;">Instant graph recalculation the moment an elevator or ramp changes status to "Under Maintenance" or "Blocked".</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🏢</div>
+                        <div>
+                            <strong>Multi-Floor Architectural Blueprint</strong>
+                            <p style="font-size: 13px; color: #64748b;">Believable Ground and 1st Floor building models with animated SVG route trails and live departure radar pulse.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card highlight">
+                    <h3 style="color: #1d4ed8;">🌟 The Key Differentiator</h3>
+                    <p style="margin-top: 10px; font-size: 14px; line-height: 1.7; color: #1e3a8a;">
+                        <strong>Most maps show you where to go. AccessTwin knows how the building is currently operating.</strong><br><br>
+                        By combining live infrastructure state + graph pathfinding + crowdsourced incident verification, AccessTwin ensures no visitor is ever stranded at an inaccessible dead end.
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <span>AccessTwin Presentation Deck</span>
+                <span>Slide 3 / 6</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: ARCHITECTURE & TECHNICAL IMPLEMENTATION -->
+        <section class="slide">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <h2>3. Technical Architecture</h2>
+                    <p>Standards-based spatial graph and client-side intelligence</p>
+                </div>
+                <span class="slide-tag">Engineering</span>
+            </div>
+
+            <div class="card-grid-3">
+                <div class="info-card">
+                    <div class="step-number">1</div>
+                    <h3 style="margin-top: 12px;">GeoJSON Graph</h3>
+                    <p>Spatial modeling of nodes (entrances, ramps, lift shafts, rooms) and edges with distance metrics and accessibility attributes (<code>wheelchair_accessible: true/false</code>).</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="step-number">2</div>
+                    <h3 style="margin-top: 12px;">Dijkstra Engine</h3>
+                    <p>Custom accessibility-filtered pathfinding that prunes blocked nodes and inaccessible edge transitions before computing shortest weighted paths.</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="step-number">3</div>
+                    <h3 style="margin-top: 12px;">SVG Dynamic Layer</h3>
+                    <p>Real-time vector rendering engine that overlays glowing directional trails, waypoint markers, and live GPS radar pulses directly over the blueprint.</p>
+                </div>
+            </div>
+
+            <div class="info-card" style="margin-top: 20px;">
+                <h3 style="margin-bottom: 6px;">🔄 Closed-Loop Incident Management</h3>
+                <p><strong>Visitor Report:</strong> Flags an unrecorded barrier on their path &rarr; <strong>Facility Admin View:</strong> Ticket logged in real-time &rarr; <strong>Verification:</strong> Admin verifies & updates status with 1 click &rarr; <strong>System Reroute:</strong> Campus routes update immediately.</p>
+            </div>
+
+            <div class="footer-note">
+                <span>AccessTwin Presentation Deck</span>
+                <span>Slide 4 / 6</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: LIVE DEMO SCENARIOS -->
+        <section class="slide">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <h2>4. Live Presentation Walkthrough</h2>
+                    <p>Guaranteed 1-click demonstration scenarios</p>
+                </div>
+                <span class="slide-tag">Live Demo</span>
+            </div>
+
+            <div class="demo-box active">
+                <span class="demo-tag baseline">PRESET 1: BASELINE (NORMAL)</span>
+                <strong style="display: block; font-size: 15px; margin-bottom: 4px;">Optimal Accessible Route</strong>
+                <p style="font-size: 13px; color: #475569; margin: 0;">
+                    User selects <em>Main Entrance &rarr; Computer Science Lab</em>. The engine finds the primary accessible path via <strong>Ramp A and Elevator 1</strong> (140m &bull; ~2.3 min).
+                </p>
+            </div>
+
+            <div class="demo-box active">
+                <span class="demo-tag reroute">PRESET 2: ELEVATOR 1 OUTAGE (REROUTE)</span>
+                <strong style="display: block; font-size: 15px; margin-bottom: 4px;">Dynamic Detour via Elevator 2</strong>
+                <p style="font-size: 13px; color: #475569; margin: 0;">
+                    Elevator 1 is flagged as <em>Under Maintenance</em>. AccessTwin instantly reroutes the user via <strong>Ramp B and Elevator 2</strong>, updating distance (+90m) and turn-by-turn cards automatically.
+                </p>
+            </div>
+
+            <div class="demo-box active">
+                <span class="demo-tag outage">PRESET 3: FULL OUTAGE (BARRIER WARNING)</span>
+                <strong style="display: block; font-size: 15px; margin-bottom: 4px;">Proactive Barrier Alert</strong>
+                <p style="font-size: 13px; color: #475569; margin: 0;">
+                    Both elevators are unavailable. AccessTwin detects no step-free path to upper floors exists and displays a clear warning: <em>"No accessible route found"</em>, preventing wasted trips.
+                </p>
+            </div>
+
+            <div class="footer-note">
+                <span>AccessTwin Presentation Deck</span>
+                <span>Slide 5 / 6</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: IMPACT & FUTURE SCOPE -->
+        <section class="slide">
+            <div class="slide-header">
+                <div class="slide-title-group">
+                    <h2>5. Impact & Future Roadmap</h2>
+                    <p>Scaling accessibility intelligence to smart cities and enterprises</p>
+                </div>
+                <span class="slide-tag">Roadmap</span>
+            </div>
+
+            <div class="card-grid-2">
+                <div class="info-card">
+                    <h3>🌍 Real-World Impact</h3>
+                    <ul style="padding-left: 20px; margin: 8px 0 0; font-size: 13px; color: #475569;">
+                        <li><strong>Universities & Hospitals:</strong> Step-free navigation for patients, staff, and visitors.</li>
+                        <li><strong>Airports & Transit Hubs:</strong> Seamless wheelchair routing with luggage detours.</li>
+                        <li><strong>Regulatory Compliance:</strong> Assisting facilities in meeting ADA and international accessibility standards.</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>🚀 Future Expansion</h3>
+                    <ul style="padding-left: 20px; margin: 8px 0 0; font-size: 13px; color: #475569;">
+                        <li><strong>IoT Sensor Integration:</strong> Automated lift telemetry via building management APIs.</li>
+                        <li><strong>Audio & Haptic Turn-by-Turn:</strong> Audio cues for visually impaired visitors.</li>
+                        <li><strong>Computer Vision Feedback:</strong> Real-time camera detection of hallway obstacles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="background: #1e293b; color: white; border-radius: 12px; padding: 24px; margin-top: 24px; text-align: center;">
+                <h3 style="margin: 0 0 6px; font-size: 18px; color: white;">Thank You!</h3>
+                <p style="margin: 0; font-size: 13px; color: #94a3b8;">
+                    Explore the live project at <strong>https://access-twin-zeta.vercel.app/</strong>
+                </p>
+            </div>
+
+            <div class="footer-note">
+                <span>AccessTwin Presentation Deck</span>
+                <span>Slide 6 / 6</span>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
