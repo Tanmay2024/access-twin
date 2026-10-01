@@ -1,0 +1,444 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "venue_name": "University Tech Campus",
+    "version": "2.0"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [0, 0] },
+      "properties": {
+        "id": "entrance_main",
+        "name": "Main Entrance",
+        "node_type": "entrance",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [0, 100] },
+      "properties": {
+        "id": "entrance_side",
+        "name": "Side Entrance",
+        "node_type": "entrance",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [60, 0] },
+      "properties": {
+        "id": "ramp_a",
+        "name": "Ramp A",
+        "node_type": "ramp",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [60, 100] },
+      "properties": {
+        "id": "ramp_b",
+        "name": "Ramp B",
+        "node_type": "ramp",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120, 0] },
+      "properties": {
+        "id": "elevator_1_ground",
+        "name": "Elevator 1 Ground Floor",
+        "node_type": "elevator",
+        "type": "elevator",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120, 100] },
+      "properties": {
+        "id": "elevator_2_ground",
+        "name": "Elevator 2 Ground Floor",
+        "node_type": "elevator",
+        "type": "elevator",
+        "floor": 0,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [80, 50] },
+      "properties": {
+        "id": "stairs_ground",
+        "name": "Central Staircase",
+        "node_type": "stairs",
+        "type": "stairs",
+        "floor": 0,
+        "accessible": false,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120, 0] },
+      "properties": {
+        "id": "elevator_1_first",
+        "name": "Elevator 1 First Floor",
+        "node_type": "elevator",
+        "type": "elevator",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120, 100] },
+      "properties": {
+        "id": "elevator_2_first",
+        "name": "Elevator 2 First Floor",
+        "node_type": "elevator",
+        "type": "elevator",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [80, 50] },
+      "properties": {
+        "id": "stairs_first",
+        "name": "Central Staircase 1st Floor",
+        "node_type": "stairs",
+        "type": "stairs",
+        "floor": 1,
+        "accessible": false,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [180, 50] },
+      "properties": {
+        "id": "corridor_first",
+        "name": "First Floor Central Corridor",
+        "node_type": "corridor",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [250, 0] },
+      "properties": {
+        "id": "lab_101",
+        "name": "Computer Science Lab",
+        "node_type": "room",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [250, 40] },
+      "properties": {
+        "id": "library",
+        "name": "Library",
+        "node_type": "room",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [250, 80] },
+      "properties": {
+        "id": "lecture_hall",
+        "name": "Lecture Hall",
+        "node_type": "room",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [250, 120] },
+      "properties": {
+        "id": "admin_office",
+        "name": "Admin Office",
+        "node_type": "room",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [200, 120] },
+      "properties": {
+        "id": "restroom_acc",
+        "name": "Accessible Restroom",
+        "node_type": "room",
+        "floor": 1,
+        "accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[0, 0], [60, 0]] },
+      "properties": {
+        "id": "edge_main_ramp_a",
+        "source": "entrance_main",
+        "target": "ramp_a",
+        "distance": 60,
+        "distance_meters": 60,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[60, 0], [120, 0]] },
+      "properties": {
+        "id": "edge_ramp_a_elevator_1",
+        "source": "ramp_a",
+        "target": "elevator_1_ground",
+        "distance": 50,
+        "distance_meters": 50,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[0, 0], [60, 100]] },
+      "properties": {
+        "id": "edge_main_ramp_b",
+        "source": "entrance_main",
+        "target": "ramp_b",
+        "distance": 100,
+        "distance_meters": 100,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[60, 100], [120, 100]] },
+      "properties": {
+        "id": "edge_ramp_b_elevator_2",
+        "source": "ramp_b",
+        "target": "elevator_2_ground",
+        "distance": 50,
+        "distance_meters": 50,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[0, 100], [60, 100]] },
+      "properties": {
+        "id": "edge_side_ramp_b",
+        "source": "entrance_side",
+        "target": "ramp_b",
+        "distance": 40,
+        "distance_meters": 40,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[0, 100], [60, 0]] },
+      "properties": {
+        "id": "edge_side_ramp_a",
+        "source": "entrance_side",
+        "target": "ramp_a",
+        "distance": 120,
+        "distance_meters": 120,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[0, 0], [80, 50]] },
+      "properties": {
+        "id": "edge_main_stairs",
+        "source": "entrance_main",
+        "target": "stairs_ground",
+        "distance": 40,
+        "distance_meters": 40,
+        "wheelchair_accessible": false,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[120, 0], [120, 0]] },
+      "properties": {
+        "id": "edge_elevator_1_floor_change",
+        "source": "elevator_1_ground",
+        "target": "elevator_1_first",
+        "distance": 10,
+        "distance_meters": 10,
+        "wheelchair_accessible": true,
+        "current_status": "available",
+        "type": "elevator"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[120, 100], [120, 100]] },
+      "properties": {
+        "id": "edge_elevator_2_floor_change",
+        "source": "elevator_2_ground",
+        "target": "elevator_2_first",
+        "distance": 10,
+        "distance_meters": 10,
+        "wheelchair_accessible": true,
+        "current_status": "available",
+        "type": "elevator"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[80, 50], [80, 50]] },
+      "properties": {
+        "id": "edge_stairs_floor_change",
+        "source": "stairs_ground",
+        "target": "stairs_first",
+        "distance": 30,
+        "distance_meters": 30,
+        "wheelchair_accessible": false,
+        "current_status": "available",
+        "type": "stairs"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[120, 0], [180, 50]] },
+      "properties": {
+        "id": "edge_elevator_1_corridor",
+        "source": "elevator_1_first",
+        "target": "corridor_first",
+        "distance": 30,
+        "distance_meters": 30,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[120, 100], [180, 50]] },
+      "properties": {
+        "id": "edge_elevator_2_corridor",
+        "source": "elevator_2_first",
+        "target": "corridor_first",
+        "distance": 30,
+        "distance_meters": 30,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[80, 50], [180, 50]] },
+      "properties": {
+        "id": "edge_stairs_corridor",
+        "source": "stairs_first",
+        "target": "corridor_first",
+        "distance": 20,
+        "distance_meters": 20,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[180, 50], [250, 0]] },
+      "properties": {
+        "id": "edge_corridor_lab",
+        "source": "corridor_first",
+        "target": "lab_101",
+        "distance": 40,
+        "distance_meters": 40,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[180, 50], [250, 40]] },
+      "properties": {
+        "id": "edge_corridor_library",
+        "source": "corridor_first",
+        "target": "library",
+        "distance": 50,
+        "distance_meters": 50,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[180, 50], [250, 80]] },
+      "properties": {
+        "id": "edge_corridor_lecture_hall",
+        "source": "corridor_first",
+        "target": "lecture_hall",
+        "distance": 60,
+        "distance_meters": 60,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[180, 50], [250, 120]] },
+      "properties": {
+        "id": "edge_corridor_admin_office",
+        "source": "corridor_first",
+        "target": "admin_office",
+        "distance": 45,
+        "distance_meters": 45,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "LineString", "coordinates": [[180, 50], [200, 120]] },
+      "properties": {
+        "id": "edge_corridor_restroom",
+        "source": "corridor_first",
+        "target": "restroom_acc",
+        "distance": 35,
+        "distance_meters": 35,
+        "wheelchair_accessible": true,
+        "current_status": "available"
+      }
+    }
+  ]
+}

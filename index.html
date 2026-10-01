@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AccessTwin</title>
+
+    <link rel="stylesheet" href="style.css?v=2.0">
+</head>
+
+<body>
+
+    <header>
+        <div class="brand-group">
+            <div class="brand-logo">
+                <span class="logo-icon">♿</span>
+            </div>
+            <div>
+                <h1>AccessTwin</h1>
+                <p>Dynamic Indoor Accessibility Platform</p>
+            </div>
+            <div class="facility-badge">
+                <span class="badge-live-dot"></span>
+                <span>University Tech Campus</span>
+            </div>
+        </div>
+
+        <nav>
+            <button id="visitorButton">Visitor</button>
+            <button id="adminButton">Facility Admin</button>
+        </nav>
+    </header>
+
+    <div class="demo-bar">
+        <span class="demo-badge">⚡ JUDGE DEMO PRESETS:</span>
+        <button class="preset-btn active" id="presetNormal">1. Baseline (Normal)</button>
+        <button class="preset-btn" id="presetElevator1Down">2. Elevator 1 Down (Reroute)</button>
+        <button class="preset-btn" id="presetTotalOutage">3. Full Outage (Barrier)</button>
+    </div>
+
+
+    <main>
+
+        <section id="adminPanel" class="panel admin-panel">
+
+            <h2>Facility Admin</h2>
+
+            <label>INFRASTRUCTURE</label>
+
+            <select id="adminInfrastructure">
+                <option value="elevator_1">Elevator 1</option>
+                <option value="elevator_2">Elevator 2</option>
+                <option value="ramp_a">Ramp A</option>
+                <option value="ramp_b">Ramp B</option>
+            </select>
+
+            <label>STATUS</label>
+
+            <select id="adminStatus">
+                <option value="available">Available</option>
+                <option value="maintenance">Under Maintenance</option>
+                <option value="blocked">Temporarily Blocked</option>
+            </select>
+
+            <button id="updateStatus" class="primary">
+                Update Status
+            </button>
+
+            <div id="adminMessage" class="result">
+                Select an infrastructure item and update its current condition.
+            </div>
+
+            <h3>Reported Issues</h3>
+
+            <div id="reportedIssues" class="result">
+                No new accessibility reports.
+            </div>
+
+        </section>
+
+        <!-- LEFT -->
+        <aside id="visitorPanel" class="panel">
+            <h2>Accessible Journey</h2>
+
+            <label>START</label>
+            <select id="start">
+                <option value="entrance_main">Main Entrance</option>
+                <option value="entrance_side">Side Entrance</option>
+            </select>
+
+            <label>DESTINATION</label>
+            <select id="destination">
+                <option value="lab_101">Computer Science Lab</option>
+                <option value="library">Library</option>
+                <option value="lecture_hall">Lecture Hall</option>
+                <option value="admin_office">Admin Office</option>
+                <option value="restroom_acc">Accessible Restroom</option>
+            </select>
+
+            <label>ACCESSIBILITY PROFILE</label>
+            <select id="profile">
+                <option value="wheelchair">Wheelchair / Mobility-Aid</option>
+                <option value="elderly">Elderly / Reduced Mobility</option>
+                <option value="temporary">Temporary Limitation (Crutches/Cast)</option>
+                <option value="caregiver">Caregiver / Family (Stroller/Aid)</option>
+                <option value="standard">Standard Visitor (Stairs OK)</option>
+            </select>
+
+            <button id="routeButton" class="primary">
+                Find Accessible Route
+            </button>
+
+            <div id="result" class="result">
+                Choose a destination and AccessTwin will calculate a route.
+            </div>
+
+            <button id="reportButton" class="secondary">
+                ⚠ Report an Accessibility Issue
+            </button>
+
+            <div id="reportMessage" class="result">
+            </div>
+
+        </aside>
+
+
+        <!-- MAP -->
+        <section class="map-container">
+
+            <div class="map-header">
+                <div>
+                    <h2>Indoor Accessibility Map</h2>
+                    <p>Facility floor plan • accessibility-aware routing</p>
+                </div>
+
+                <div>
+                    <button class="floor active">Ground Floor</button>
+                    <button class="floor">1st Floor</button>
+                </div>
+            </div>
+
+            <div id="map">
+
+                <!-- SVG DYNAMIC ROUTE OVERLAY -->
+                <svg id="routeSvg" class="route-svg-canvas"></svg>
+
+                <!-- GROUND FLOOR -->
+                <div id="groundFloor" class="floor-layer">
+                    <div class="floor-header-row">
+                        <span class="floor-badge">BUILDING LEVEL 0 • GROUND FLOOR BLUEPRINT</span>
+                        <div class="blueprint-legend">
+                            <span class="legend-item"><span class="legend-dot green"></span>Waypoint</span>
+                            <span class="legend-item"><span class="legend-dot amber"></span>Stairs</span>
+                            <span class="legend-item"><span class="legend-hall"></span>Hallway Corridor</span>
+                        </div>
+                    </div>
+
+                    <div class="building-grid-ground">
+                        <!-- Top Row: Entrances & Central Atrium -->
+                        <div class="arch-room room-west-foyer">
+                            <div class="arch-header">
+                                <span class="arch-code">RM 001</span>
+                                <span class="arch-name">WEST ENTRANCE FOYER</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_entrance_main" title="Main Entrance Doorway">
+                                    <span class="node-icon">🚪</span>
+                                    <span class="node-label">Main Entrance</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-central-atrium">
+                            <div class="arch-header">
+                                <span class="arch-code">ATRIUM 00</span>
+                                <span class="arch-name">CENTRAL TRANSIT ATRIUM</span>
+                            </div>
+                            <div class="arch-body concourse-flex">
+                                <span class="hall-guide">◀ West Hall</span>
+                                <div class="node node-stairs" id="node_stairs_ground" title="Central Staircase Core">
+                                    <span class="node-icon">🪜</span>
+                                    <span class="node-label">Central Stairs</span>
+                                </div>
+                                <span class="hall-guide">East Hall ▶</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-east-foyer">
+                            <div class="arch-header">
+                                <span class="arch-code">RM 002</span>
+                                <span class="arch-name">EAST ENTRANCE FOYER</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_entrance_side" title="Side Entrance Doorway">
+                                    <span class="node-icon">🚪</span>
+                                    <span class="node-label">Side Entrance</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Middle Row: Accessible Ramps & Hallway -->
+                        <div class="arch-room room-ramp-hall">
+                            <div class="arch-header">
+                                <span class="arch-code">CORR 01</span>
+                                <span class="arch-name">ADA RAMP A HALL</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_ramp_a" title="Ramp A Incline">
+                                    <span class="node-icon">♿</span>
+                                    <span class="node-label">Ramp A</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-mid-hall">
+                            <div class="hall-pavement">
+                                <span>MAIN STEP-FREE TRANSIT CONCOURSE • ACCESSIBILITY ARTERY</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-ramp-hall">
+                            <div class="arch-header">
+                                <span class="arch-code">CORR 02</span>
+                                <span class="arch-name">ADA RAMP B HALL</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_ramp_b" title="Ramp B Incline">
+                                    <span class="node-icon">♿</span>
+                                    <span class="node-label">Ramp B</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Row: Elevator Shafts & Interconnect Promenade -->
+                        <div class="arch-room room-shaft">
+                            <div class="arch-header">
+                                <span class="arch-code">CORE A</span>
+                                <span class="arch-name">ELEVATOR SHAFT 1</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_elevator_1_ground" title="Elevator 1 Cabin Ground">
+                                    <span class="node-icon">🛗 E1</span>
+                                    <span class="node-label">Elevator 1</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-promenade">
+                            <div class="promenade-line">
+                                <span>CAMPUS CORE CONNECTING CORRIDOR</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room room-shaft">
+                            <div class="arch-header">
+                                <span class="arch-code">CORE B</span>
+                                <span class="arch-name">ELEVATOR SHAFT 2</span>
+                            </div>
+                            <div class="arch-body">
+                                <div class="node" id="node_elevator_2_ground" title="Elevator 2 Cabin Ground">
+                                    <span class="node-icon">🛗 E2</span>
+                                    <span class="node-label">Elevator 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FIRST FLOOR -->
+                <div id="firstFloor" class="floor-layer first-floor" style="display: none;">
+                    <div class="floor-header-row">
+                        <span class="floor-badge">BUILDING LEVEL 1 • FIRST FLOOR BLUEPRINT</span>
+                        <div class="blueprint-legend">
+                            <span class="legend-item"><span class="legend-dot green"></span>Destination Room</span>
+                            <span class="legend-item"><span class="legend-hall"></span>Upper Corridor</span>
+                        </div>
+                    </div>
+
+                    <div class="first-top-concourse-building">
+                        <div class="arch-room core-card">
+                            <div class="arch-header"><span class="arch-code">CORE A</span></div>
+                            <div class="node" id="node_elevator_1_first" title="Elevator 1 Level 1">
+                                <span class="node-icon">🛗 E1</span>
+                                <span class="node-label">Elevator 1</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room core-card">
+                            <div class="arch-header"><span class="arch-code">STAIRS</span></div>
+                            <div class="node node-stairs" id="node_stairs_first" title="Staircase Level 1">
+                                <span class="node-icon">🪜</span>
+                                <span class="node-label">Stairwell</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room concourse-hub-card">
+                            <div class="arch-header"><span class="arch-code">CONCOURSE</span></div>
+                            <div class="node corridor-hub" id="node_corridor_first" title="Level 1 Central Corridor Hub">
+                                <span class="node-icon">✦</span>
+                                <span class="node-label">Central Hub</span>
+                            </div>
+                        </div>
+
+                        <div class="arch-room core-card">
+                            <div class="arch-header"><span class="arch-code">CORE B</span></div>
+                            <div class="node" id="node_elevator_2_first" title="Elevator 2 Level 1">
+                                <span class="node-icon">🛗 E2</span>
+                                <span class="node-label">Elevator 2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="building-rooms-first">
+                        <div class="arch-building-suite dest-card" id="node_lab_101" title="Computer Science Lab">
+                            <div class="suite-header">
+                                <span class="suite-num">RM 101</span>
+                                <span class="suite-tag">LAB</span>
+                            </div>
+                            <div class="suite-icon">💻</div>
+                            <div class="suite-name">CS Lab</div>
+                            <div class="suite-desc">Computer Science</div>
+                        </div>
+
+                        <div class="arch-building-suite dest-card" id="node_library" title="Central Library">
+                            <div class="suite-header">
+                                <span class="suite-num">RM 102</span>
+                                <span class="suite-tag">LIBRARY</span>
+                            </div>
+                            <div class="suite-icon">📚</div>
+                            <div class="suite-name">Tech Library</div>
+                            <div class="suite-desc">Reading & Research</div>
+                        </div>
+
+                        <div class="arch-building-suite dest-card" id="node_lecture_hall" title="Lecture Hall">
+                            <div class="suite-header">
+                                <span class="suite-num">RM 103</span>
+                                <span class="suite-tag">HALL A</span>
+                            </div>
+                            <div class="suite-icon">🎓</div>
+                            <div class="suite-name">Lecture Hall</div>
+                            <div class="suite-desc">Auditorium</div>
+                        </div>
+
+                        <div class="arch-building-suite dest-card" id="node_admin_office" title="Admin Office">
+                            <div class="suite-header">
+                                <span class="suite-num">RM 104</span>
+                                <span class="suite-tag">ADMIN</span>
+                            </div>
+                            <div class="suite-icon">🏢</div>
+                            <div class="suite-name">Dean's Suite</div>
+                            <div class="suite-desc">Administration</div>
+                        </div>
+
+                        <div class="arch-building-suite dest-card" id="node_restroom_acc" title="Accessible Restroom">
+                            <div class="suite-header">
+                                <span class="suite-num">RM 105</span>
+                                <span class="suite-tag">ADA</span>
+                            </div>
+                            <div class="suite-icon">♿</div>
+                            <div class="suite-name">Restroom</div>
+                            <div class="suite-desc">Step-Free WC</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="accessRoute"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT -->
+        <aside class="panel">
+
+            <h2>Current Accessibility State</h2>
+
+            <div class="status">
+                <span>Main Entrance</span>
+                <b class="available">AVAILABLE</b>
+            </div>
+
+            <div class="status">
+                <span>Side Entrance</span>
+                <b class="available">AVAILABLE</b>
+            </div>
+
+            <div class="status">
+                <span>Ramp A</span>
+                <b id="rampAStatus" class="available">AVAILABLE</b>
+            </div>
+
+            <div class="status">
+                <span>Ramp B</span>
+                <b id="rampBStatus" class="available">AVAILABLE</b>
+            </div>
+
+            <div class="status">
+                <span>Elevator 1</span>
+                <b id="elevator1Status" class="available">AVAILABLE</b>
+            </div>
+
+            <div class="status">
+                <span>Elevator 2</span>
+                <b id="elevator2Status" class="available">AVAILABLE</b>
+            </div>
+
+            <h3>Route Impact</h3>
+
+            <div id="routeInfo">
+                No route calculated yet.
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <script src="app.js?v=2.0"></script>
+
+</body>
+
+</html>
