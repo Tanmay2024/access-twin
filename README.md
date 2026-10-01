@@ -69,5 +69,3 @@ AccessTwin/
 
 ---
 
-## 👥 Authors & Contributors
-Developed by Tanmay ([@Tanmay2024](https://github.com/Tanmay2024)).
